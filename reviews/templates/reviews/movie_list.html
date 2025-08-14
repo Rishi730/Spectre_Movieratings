@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}All Movies{% endblock %}
+{% block content %}
+
+<h1>Movie Rankings</h1>
+
+<form method="get" class="search-form">
+  <input type="text" name="q" placeholder="Search movies..." value="{{ q }}">
+  <select name="genre">
+    <option value="">All genres</option>
+    {% for g in genres %}
+      <option value="{{ g }}" {% if active_genre == g %}selected{% endif %}>{{ g }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Search</button>
+</form>
+
+{% for m in movies %}
+  <div class="movie">
+    <div>
+      {% if m.poster_url %}
+        <img src="{{ m.poster_url }}" alt="{{ m.title }}">
+      {% endif %}
+    </div>
+    <div class="movie-info">
+      <h3><a href="{% url 'movie_detail' m.pk %}" class="movie-title">{{ m.title }}</a></h3>
+      <div class="movie-genre">{{ m.genre }}</div>
+      <p class="movie-description">{{ m.description|truncatewords:25 }}</p>
+    </div>
+    <div class="movie-rating">
+      <div class="rating-score">{{ m.rating }}/10</div>
+      <div class="rating-stars">
+        {% if m.rating >= 9 %}
+          ★★★★★
+        {% elif m.rating >= 7 %}
+          ★★★★☆
+        {% elif m.rating >= 5 %}
+          ★★★☆☆
+        {% elif m.rating >= 3 %}
+          ★★☆☆☆
+        {% else %}
+          ★☆☆☆☆
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% empty %}
+  <div class="empty-state">
+    <h2>No Movies Yet</h2>
+    <p>Load some movies via the API command to get started!</p>
+  </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ movie.title }}{% endblock %}
+{% block content %}
+
+<div class="movie-detail">
+  <div class="movie-detail-header">
+    {% if movie.poster_url %}
+      <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="movie-detail-poster">
+    {% endif %}
+    <div class="movie-detail-info">
+      <h1>{{ movie.title }}</h1>
+      <div class="movie-genre">{{ movie.genre }}</div>
+      <div class="movie-detail-rating">{{ movie.rating }}/10</div>
+      <p class="movie-description">{{ movie.description }}</p>
+    </div>
+  </div>
+
+  <div class="reviews-section">
+    <h2>Reviews</h2>
+    {% if user.is_authenticated %}
+      <p><a href="{% url 'add_review' movie.pk %}" class="form-submit" style="display: inline-block; text-align: center; text-decoration: none;">Write a Review</a></p>
+    {% else %}
+      <p><a href="{% url 'login' %}?next={% url 'movie_detail' movie.pk %}" class="form-submit" style="display: inline-block; text-align: center; text-decoration: none;">Log in to Write a Review</a></p>
+    {% endif %}
+
+    {% for r in movie.reviews.all %}
+      <div class="review">
+        <div class="review-header">
+          <span class="review-user">{{ r.user.username }}</span>
+          <span class="review-stars">⭐ {{ r.stars }}/10</span>
+        </div>
+        <div class="review-text">{{ r.text }}</div>
+        <div class="review-date">{{ r.created_at|date:"F j, Y" }}</div>
+      </div>
+    {% empty %}
+      <p class="empty-state">No reviews yet. Be the first to review this movie!</p>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
