@@ -1,21 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Spectre-Movie Ratings Website{% endblock %}</title>
-  <link rel="stylesheet" href="/static/style.css">
+  
+  <!-- Title with Spectre brand -->
+  <title>Spectre – {% block title %}Movie Ratings Website{% endblock %}</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'second.jpg' %}" type="image/png">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
   <header>
     <nav>
-      <div>
+      <div class="nav-left">
+        <!-- Logo -->
+        <a href="{% url 'movie_list' %}" class="logo-link">
+          <img src="{% static 'second.jpg' %}" alt="Spectre Logo" class="site-logo">
+        </a>
         <a href="{% url 'movie_list' %}">🏠 Home</a>
         {% if user.is_authenticated %}
           <a href="/admin/" class="admin-link">⚙️ Admin</a>
         {% endif %}
       </div>
-      <div>
+      <div class="nav-right">
         {% if user.is_authenticated %}
           <span>👋 Hi, {{ user.username }}</span>
           <a href="{% url 'logout' %}">🚪 Logout</a>
@@ -30,6 +42,7 @@
   <main>
     {% block content %}{% endblock %}
   </main>
+
   <footer>
     <h2>Made By Rishi730 GSW</h2>
   </footer>
