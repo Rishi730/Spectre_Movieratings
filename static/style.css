@@ -471,3 +471,28 @@ h3 {
     background: #ff6b35;
     color: #000000;
 }
+
+/* ====== Logo Styles (Added) ====== */
+.site-logo {
+    height: 45px; /* Slightly bigger than text */
+    vertical-align: middle;
+    border-radius: 8px; /* Slightly rounded corners for a polished look */
+    transition: transform 0.2s ease;
+}
+
+.site-logo:hover {
+    transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+.logo-link {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+/* Adjust nav-left to align logo and links properly */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
