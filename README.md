@@ -1,4 +1,4 @@
-# 🎬 Movie Ratings Web Application
+# 🎬 Spectre Movie Ratings Website (IMDB Clone)
 
 A **Full-Stack Movie Ratings Web Application** built with **Django**, integrated with the **OMDB API** to fetch real-time movie data.  
 Users can search for movies, view detailed information, and rate them — all through an interactive web interface.
