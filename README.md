@@ -30,6 +30,3 @@ Users can search for movies, view detailed information, and rate them — all th
 
 ---
 
-
-git clone https://github.com/Rishi730/movieratings.git
-cd movieratings
